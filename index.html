@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Garage du Canal — Mécanique et carrosserie (site démo)</title>
+<meta name="description" content="Garage du Canal, garage indépendant toutes marques. Entretien, freinage, pneus, climatisation, carrosserie. Devis gratuit avant travaux.">
+<meta name="theme-color" content="#14171b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+  :root {
+    --graphite: #14171b;
+    --steel: #1e2329;
+    --plate: #2b323a;
+    --paper: #f1efe9;
+    --white: #fbfaf7;
+    --ink: #14171b;
+    --muted: #666d75;
+    --muted-d: #98a1aa;
+    --orange: #ff5a1f;
+    --orange-d: #d94410;
+    --line: rgba(20, 23, 27, .16);
+    --line-d: rgba(241, 239, 233, .14);
+    --sans: "Archivo", "Arial Narrow", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --ease: cubic-bezier(.2, .75, .15, 1);
+    --nav-h: 68px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 8px); -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.55; font-size: 17px; overflow-x: hidden; }
+  h1, h2, h3, p, ul, ol, blockquote { margin: 0; }
+  ul, ol { padding: 0; list-style: none; }
+  a { color: inherit; }
+  button, input, select { font: inherit; color: inherit; }
+  svg { display: block; max-width: 100%; }
+  :focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .wrap { width: min(1240px, 100% - 56px); margin-inline: auto; }
+  section { padding: clamp(72px, 9vw, 128px) 0; position: relative; }
+  .tag { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--orange-d); display: flex; align-items: center; gap: 10px; }
+  .tag::before { content: ""; width: 9px; height: 9px; background: var(--orange); flex: none; }
+  .dark .tag { color: var(--orange); }
+  h2 { font-stretch: 68%; font-weight: 800; text-transform: uppercase; font-size: clamp(42px, 6.6vw, 92px); line-height: .9; letter-spacing: -.01em; margin-top: 16px; }
+  h2 em { font-style: normal; color: var(--orange); }
+  .lead { color: var(--muted); max-width: 54ch; margin-top: 22px; font-size: 18px; }
+  .dark { background: var(--graphite); color: var(--paper); }
+  .dark .lead { color: var(--muted-d); }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 54px; padding: 0 26px; background: var(--orange); color: #14171b; font-weight: 700; font-stretch: 88%; font-size: 15.5px; letter-spacing: .04em; text-transform: uppercase; text-decoration: none; border: 0; cursor: pointer; position: relative; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); transition: background .25s, transform .25s var(--ease); }
+  .btn:hover { background: #ff7440; transform: translate(-2px, -2px); }
+  .btn:active { transform: none; }
+  .btn svg { width: 16px; height: 16px; transition: transform .3s var(--ease); }
+  .btn:hover svg { transform: translateX(4px); }
+  .btn.ghost { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; clip-path: none; }
+  .btn.ghost:hover { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--paper); }
+
+  /* Nav */
+  .nav { position: fixed; inset: 0 0 auto 0; height: var(--nav-h); z-index: 50; color: var(--paper); transition: background .3s, box-shadow .3s; }
+  .nav.solid { background: rgba(20, 23, 27, .95); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--line-d); }
+  .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-stretch: 70%; font-size: 22px; text-transform: uppercase; letter-spacing: .02em; line-height: 1; }
+  .logo i { width: 34px; height: 34px; background: var(--orange); display: grid; place-items: center; color: #14171b; font-style: normal; font-size: 19px; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+  .nav ul { display: flex; gap: 30px; font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .06em; }
+  .nav ul a { text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; transition: border-color .25s, color .25s; }
+  .nav ul a:hover { border-color: var(--orange); color: var(--orange); }
+  .nav .tel { font-family: var(--mono); font-size: 15px; text-decoration: none; display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 16px; box-shadow: inset 0 0 0 1px var(--line-d); transition: background .25s, color .25s; }
+  .nav .tel:hover { background: var(--orange); color: #14171b; box-shadow: none; }
+  .nav .tel::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #7a828b; }
+  .is-open .nav .tel::before { background: #3fd07a; box-shadow: 0 0 0 0 rgba(63, 208, 122, .6); animation: ping 2s infinite; }
+  @keyframes ping { to { box-shadow: 0 0 0 9px rgba(63, 208, 122, 0); } }
+  .burger { display: none; width: 46px; height: 46px; border: 0; background: none; cursor: pointer; position: relative; margin-right: -10px; color: inherit; }
+  .burger span { position: absolute; left: 11px; right: 11px; height: 2px; background: currentColor; transition: transform .35s var(--ease), top .35s var(--ease), opacity .2s; }
+  .burger span:nth-child(1) { top: 15px; } .burger span:nth-child(2) { top: 22px; } .burger span:nth-child(3) { top: 29px; }
+  .menu-open .burger span:nth-child(1) { top: 22px; transform: rotate(45deg); }
+  .menu-open .burger span:nth-child(2) { opacity: 0; }
+  .menu-open .burger span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+  .sheet { position: fixed; inset: 0; z-index: 40; background: var(--graphite); color: var(--paper); padding: 96px 28px 40px; display: flex; flex-direction: column; justify-content: center; transform: translateX(100%); visibility: hidden; transition: transform .5s var(--ease), visibility 0s .5s; }
+  .menu-open .sheet { transform: none; visibility: visible; transition: transform .5s var(--ease); }
+  .sheet a.big { font-stretch: 66%; font-weight: 800; text-transform: uppercase; font-size: clamp(44px, 13vw, 64px); line-height: 1.08; text-decoration: none; display: flex; align-items: baseline; gap: 14px; }
+  .sheet a.big small { font-family: var(--mono); font-size: 13px; color: var(--orange); font-weight: 400; }
+  .sheet .foot { margin-top: 36px; font-family: var(--mono); font-size: 14px; color: var(--muted-d); }
+  .menu-open .nav { background: transparent; box-shadow: none; backdrop-filter: none; }
+
+  /* Hero */
+  .hero { position: relative; padding: calc(var(--nav-h) + clamp(28px, 5vw, 64px)) 0 0; overflow: hidden; background: var(--graphite); color: var(--paper); }
+  .hero::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--line-d) 1px, transparent 1px), linear-gradient(90deg, var(--line-d) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(120% 90% at 60% 60%, #000 20%, transparent 78%); -webkit-mask-image: radial-gradient(120% 90% at 60% 60%, #000 20%, transparent 78%); opacity: .7; }
+  .hero .wrap { position: relative; }
+  .hero h1 { font-stretch: 64%; font-weight: 900; text-transform: uppercase; font-size: clamp(64px, 11.4vw, 164px); line-height: .82; letter-spacing: -.012em; margin-top: 18px; }
+  .hero h1 span { display: block; overflow: hidden; padding-top: .17em; margin-top: -.17em; }
+  .hero h1 span:first-child { margin-top: 0; }
+  .hero h1 b { display: block; font-weight: inherit; transform: translateY(102%); animation: up .9s var(--ease) forwards; }
+  .hero h1 span:nth-child(2) b { animation-delay: .1s; color: var(--orange); }
+  @keyframes up { to { transform: none; } }
+  .hero .sub { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; margin-top: clamp(22px, 3vw, 40px); }
+  .hero .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fadein { opacity: 0; animation: fadein .9s .45s var(--ease) forwards; }
+  @keyframes fadein { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  /* Diagnostic car */
+  .diag { position: relative; margin-top: clamp(18px, 3vw, 36px); display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 32px; align-items: end; padding-bottom: clamp(40px, 6vw, 72px); }
+  .diag > * { min-width: 0; }
+  .car { position: relative; }
+  .car svg { width: 100%; height: auto; overflow: visible; }
+  .car .ln { fill: none; stroke: var(--paper); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: trace 2.2s var(--ease) forwards; animation-delay: calc(var(--i, 0) * 120ms + 300ms); }
+  .car .thin { stroke-width: 1; opacity: .5; }
+  .car .dim { stroke: var(--orange); stroke-width: 1; opacity: .8; }
+  .car text { font-family: var(--mono); font-size: 10px; fill: var(--muted-d); letter-spacing: .08em; }
+  @keyframes trace { to { stroke-dashoffset: 0; } }
+  .spot { position: absolute; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; opacity: 0; animation: fadein .5s 2s forwards; }
+  .spot i { width: 16px; height: 16px; border-radius: 50%; background: var(--paper); box-shadow: 0 0 0 5px rgba(241, 239, 233, .16); transition: transform .3s var(--ease), background .3s, box-shadow .3s; position: relative; }
+  .spot i::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--paper); animation: ring 2.4s infinite; }
+  @keyframes ring { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
+  .spot:hover i { transform: scale(1.2); }
+  .spot[aria-pressed="true"] i { background: var(--orange); box-shadow: 0 0 0 7px rgba(255, 90, 31, .28); transform: scale(1.25); }
+  .spot[aria-pressed="true"] i::after { border-color: var(--orange); }
+  .sheet-card { background: var(--steel); padding: 26px; position: relative; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%); }
+  .sheet-card .ref { font-family: var(--mono); font-size: 12px; color: var(--orange); letter-spacing: .08em; text-transform: uppercase; }
+  .sheet-card h3 { font-stretch: 72%; font-weight: 800; text-transform: uppercase; font-size: 34px; line-height: .98; margin: 10px 0 12px; }
+  .sheet-card p { color: var(--muted-d); font-size: 15.5px; min-height: 4.6em; }
+  .sheet-card dl { display: grid; grid-template-columns: 1fr 1fr; margin: 18px 0 20px; border-top: 1px solid var(--line-d); }
+  .sheet-card dl div { padding: 14px 0 0; }
+  .sheet-card dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted-d); }
+  .sheet-card dd { margin: 4px 0 0; font-stretch: 76%; font-weight: 700; font-size: 26px; }
+  .sheet-card .btn { width: 100%; }
+  .swap { animation: swap .45s var(--ease); }
+  @keyframes swap { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .picks { display: none; }
+
+  /* Ticker strip */
+  .strip { background: var(--orange); color: #14171b; overflow: hidden; white-space: nowrap; padding: 13px 0; font-family: var(--mono); font-size: 13.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; }
+  .strip .track { display: inline-flex; animation: tick 34s linear infinite; }
+  .strip span { padding: 0 26px; position: relative; }
+  .strip span::after { content: "/"; position: absolute; right: -4px; opacity: .5; }
+  @keyframes tick { to { transform: translateX(-50%); } }
+
+  /* Numbers */
+  .nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-right: 0; margin-top: 56px; }
+  .num { padding: 26px 24px 24px; border-right: 1px solid var(--line); background: var(--white); position: relative; overflow: hidden; }
+  .num::before { content: attr(data-n); position: absolute; top: 12px; right: 14px; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .num b { display: block; font-stretch: 64%; font-weight: 900; font-size: clamp(54px, 7vw, 96px); line-height: .9; font-variant-numeric: tabular-nums; }
+  .num span { display: block; margin-top: 10px; color: var(--muted); font-size: 15px; }
+  .atelier .grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(28px, 5vw, 80px); align-items: end; }
+  .atelier .side p + p { margin-top: 14px; }
+  .atelier .side p { color: var(--muted); }
+
+  /* Work order estimator */
+  .order { background: var(--white); border: 1px solid var(--line); margin-top: 56px; display: grid; grid-template-columns: minmax(0, 1fr) 360px; }
+  .order .head, .row { display: grid; grid-template-columns: 54px minmax(0, 1fr) 110px 120px; align-items: center; }
+  .order .head { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid var(--ink); padding: 14px 0; }
+  .order .head span:nth-child(n+3), .row .t, .row .p { text-align: right; padding-right: 22px; }
+  .row { border-bottom: 1px solid var(--line); cursor: pointer; position: relative; transition: background .2s; min-height: 78px; }
+  .row:hover { background: rgba(255, 90, 31, .06); }
+  .row input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+  .row .box { width: 22px; height: 22px; border: 1.5px solid var(--ink); margin-left: 20px; display: grid; place-items: center; transition: background .2s, border-color .2s; }
+  .row .box svg { width: 14px; height: 14px; stroke: #14171b; stroke-width: 2.4; fill: none; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .3s var(--ease); }
+  .row input:checked ~ .box { background: var(--orange); border-color: var(--orange); }
+  .row input:checked ~ .box svg { stroke-dashoffset: 0; }
+  .row input:focus-visible ~ .box { outline: 2px solid var(--orange); outline-offset: 3px; }
+  .row .n { padding: 14px 16px 14px 0; }
+  .row .n b { display: block; font-stretch: 80%; font-weight: 700; font-size: 20px; text-transform: uppercase; line-height: 1.1; }
+  .row .n small { color: var(--muted); font-size: 14.5px; }
+  .row .t { font-family: var(--mono); font-size: 13.5px; color: var(--muted); }
+  .row .p { font-stretch: 76%; font-weight: 800; font-size: 24px; white-space: nowrap; }
+  .row .p small { font-family: var(--mono); font-weight: 400; font-size: 11px; color: var(--muted); display: block; text-transform: uppercase; letter-spacing: .06em; }
+  .total { background: var(--graphite); color: var(--paper); padding: 30px; display: flex; flex-direction: column; }
+  .total .ref { font-family: var(--mono); font-size: 12px; color: var(--muted-d); letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: space-between; }
+  .total ul { margin: 22px 0; flex: 1; font-family: var(--mono); font-size: 13.5px; display: grid; gap: 10px; align-content: start; }
+  .total li { display: flex; justify-content: space-between; gap: 12px; }
+  .total li.empty { color: var(--muted-d); }
+  .total .sum { border-top: 1px dashed var(--line-d); padding-top: 18px; }
+  .total .sum small { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted-d); }
+  .total .sum b { display: block; font-stretch: 64%; font-weight: 900; font-size: 72px; line-height: .95; font-variant-numeric: tabular-nums; }
+  .total .sum p { font-size: 13.5px; color: var(--muted-d); margin: 8px 0 20px; }
+  .total .btn { width: 100%; }
+  .total .btn[aria-disabled="true"] { background: var(--plate); color: var(--muted-d); pointer-events: none; }
+
+  /* Process */
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 64px; border-top: 1px solid var(--line-d); }
+  .step { padding: 28px 24px 0 0; position: relative; }
+  .step + .step { padding-left: 24px; border-left: 1px solid var(--line-d); }
+  .step .no { font-stretch: 62%; font-weight: 900; font-size: clamp(72px, 9vw, 128px); line-height: .8; color: transparent; -webkit-text-stroke: 1.5px var(--plate); transition: color .5s, -webkit-text-stroke-color .5s; }
+  .step.in .no, .step:hover .no { color: var(--orange); -webkit-text-stroke-color: var(--orange); }
+  .step h3 { font-stretch: 76%; font-weight: 800; text-transform: uppercase; font-size: 24px; margin: 20px 0 8px; }
+  .step p { color: var(--muted-d); font-size: 15.5px; }
+  .vows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin-top: 72px; }
+  .vows li { display: grid; grid-template-columns: 28px 1fr; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line-d); align-items: start; }
+  .vows li:nth-child(-n+2) { border-top: 1px solid var(--line-d); }
+  .vows svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 2; margin-top: 2px; }
+  .vows b { display: block; font-stretch: 84%; font-weight: 700; font-size: 19px; text-transform: uppercase; }
+  .vows span { color: var(--muted-d); font-size: 15.5px; }
+
+  /* Avis */
+  .avis .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; }
+  .gauge { display: flex; align-items: center; gap: 18px; }
+  .gauge svg { width: 96px; height: 96px; transform: rotate(-90deg); }
+  .gauge circle { fill: none; stroke-width: 7; }
+  .gauge .bg { stroke: var(--line); }
+  .gauge .fg { stroke: var(--orange); stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 1.6s var(--ease) .2s; }
+  .gauge.in .fg { stroke-dashoffset: 6; }
+  .gauge b { font-stretch: 66%; font-weight: 900; font-size: 54px; line-height: .9; display: block; }
+  .gauge span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .quotes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 56px; border: 1px solid var(--line); background: var(--white); }
+  .q { padding: 30px; display: flex; flex-direction: column; gap: 20px; transition: background .3s, color .3s; }
+  .q + .q { border-left: 1px solid var(--line); }
+  .q:hover { background: var(--graphite); color: var(--paper); }
+  .q .job { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--orange-d); }
+  .q:hover .job { color: var(--orange); }
+  .q p { font-size: 19px; line-height: 1.42; font-stretch: 96%; }
+  .q footer { margin-top: auto; font-family: var(--mono); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; opacity: .75; }
+
+  /* Contact */
+  .contact .grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+  .bigtel { display: block; font-stretch: 64%; font-weight: 900; font-size: clamp(54px, 7.6vw, 108px); line-height: .9; text-decoration: none; margin-top: 28px; transition: color .25s; width: fit-content; }
+  .bigtel:hover { color: var(--orange); }
+  .addr { font-family: var(--mono); font-size: 14px; color: var(--muted-d); margin-top: 14px; }
+  .hours { margin-top: 34px; font-family: var(--mono); font-size: 14.5px; }
+  .hours li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line-d); }
+  .hours li:first-child { border-top: 1px solid var(--line-d); }
+  .hours li.off { color: var(--muted-d); }
+  .hours li.today { color: var(--orange); }
+  .hours li.today span:first-child::after { content: " ← aujourd'hui"; }
+  .form { background: var(--paper); color: var(--ink); padding: clamp(24px, 4vw, 44px); clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%); }
+  .form h3 { font-stretch: 70%; font-weight: 800; text-transform: uppercase; font-size: 38px; line-height: .95; }
+  .form form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 26px; }
+  .f { display: grid; gap: 7px; }
+  .f.full { grid-column: 1 / -1; }
+  .f label { font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .f input, .f select { width: 100%; height: 52px; padding: 0 14px; border: 1.5px solid var(--ink); background: var(--white); border-radius: 0; appearance: none; transition: box-shadow .2s, border-color .2s; }
+  .f select { background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%2314171b' stroke-width='2'%3E%3Cpath d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E") no-repeat right 14px center; padding-right: 38px; }
+  .f input:focus, .f select:focus { outline: 0; border-color: var(--orange-d); box-shadow: 4px 4px 0 var(--orange); }
+  .f .err { display: none; font-size: 13.5px; color: #b3261e; }
+  .f.bad input { border-color: #b3261e; } .f.bad .err { display: block; }
+  .form .btn { width: 100%; }
+  .done { display: none; padding: 18px 0 4px; }
+  .done.on { display: block; animation: fadein .6s var(--ease) both; animation-delay: 0s; }
+  .done .stamp { display: inline-block; font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: .1em; color: #1c7c45; border: 2px solid #1c7c45; padding: 6px 12px; transform: rotate(-3deg); margin-bottom: 18px; }
+  .done p { color: var(--muted); margin-top: 10px; }
+  .done button { margin-top: 18px; background: none; border: 0; text-decoration: underline; cursor: pointer; color: var(--muted); padding: 0; }
+
+  footer.site { background: var(--graphite); color: var(--muted-d); border-top: 1px solid var(--line-d); padding: 30px 0; font-family: var(--mono); font-size: 12.5px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 14px 30px; flex-wrap: wrap; }
+  footer a { text-decoration: none; } footer a:hover { color: var(--orange); }
+  footer .links { display: flex; gap: 22px; flex-wrap: wrap; text-transform: uppercase; letter-spacing: .06em; }
+
+  .js .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+  .js .rv.in { opacity: 1; transform: none; }
+  .dock { display: none; }
+
+  @media (max-width: 1080px) {
+    .diag { grid-template-columns: 1fr; }
+    .sheet-card p { min-height: 0; }
+    .order { grid-template-columns: 1fr; }
+    .total ul { min-height: 0; }
+    .quotes { grid-template-columns: 1fr; }
+    .q + .q { border-left: 0; border-top: 1px solid var(--line); }
+  }
+  @media (max-width: 860px) {
+    body { font-size: 16px; padding-bottom: 78px; }
+    .wrap { width: min(1240px, 100% - 36px); }
+    .nav ul, .nav .tel { display: none; }
+    .burger { display: block; }
+    .hero h1 { font-size: clamp(46px, 15.4vw, 120px); white-space: nowrap; }
+    .hero .sub { grid-template-columns: 1fr; }
+    .hero .cta .btn { flex: 1 1 100%; }
+    .diag { margin-top: 30px; gap: 18px; }
+    .car { margin-inline: -8px; }
+    .car text { display: none; }
+    .spot { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+    .picks { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-inline: -18px; padding: 2px 18px; }
+    .picks::-webkit-scrollbar { display: none; }
+    .picks button { flex: none; height: 42px; padding: 0 16px; background: none; border: 0; box-shadow: inset 0 0 0 1px var(--line-d); font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: .06em; cursor: pointer; color: var(--paper); }
+    .picks button[aria-pressed="true"] { background: var(--orange); color: #14171b; box-shadow: none; }
+    .atelier .grid, .contact .grid { grid-template-columns: 1fr; }
+    .nums { grid-template-columns: 1fr 1fr; border-bottom: 0; }
+    .num { border-bottom: 1px solid var(--line); }
+    .order .head { display: none; }
+    .row { grid-template-columns: 50px minmax(0, 1fr) auto; }
+    .row .t { display: none; }
+    .row .box { margin-left: 14px; }
+    .row .p { padding-right: 14px; font-size: 22px; }
+    .total { padding: 24px 20px; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step { padding: 24px 16px 24px 0; }
+    .step:nth-child(odd) { padding-left: 0; border-left: 0; }
+    .step:nth-child(n+3) { border-top: 1px solid var(--line-d); }
+    .vows { grid-template-columns: 1fr; margin-top: 48px; }
+    .vows li:nth-child(2) { border-top: 0; }
+    .form form { grid-template-columns: 1fr; }
+    .dock { position: fixed; inset: auto 0 0 0; z-index: 30; display: grid; grid-template-columns: 1fr 1.3fr; background: var(--graphite); border-top: 1px solid var(--line-d); padding-bottom: env(safe-area-inset-bottom); transform: translateY(110%); transition: transform .45s var(--ease); }
+    .dock.show { transform: none; }
+    .menu-open .dock { transform: translateY(110%); }
+    .dock a { height: 62px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-weight: 700; font-stretch: 86%; text-transform: uppercase; letter-spacing: .04em; font-size: 15px; color: var(--paper); }
+    .dock a:last-child { background: var(--orange); color: #14171b; }
+    .dock svg { width: 18px; height: 18px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .001s !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+    .strip .track { animation: none !important; }
+    .gauge .fg { stroke-dashoffset: 6; transition: none; }
+    .js .rv { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Garage du Canal, accueil"><i>G</i>Garage du Canal</a>
+    <ul>
+      <li><a href="#atelier">L'atelier</a></li>
+      <li><a href="#devis">Tarifs</a></li>
+      <li><a href="#methode">Méthode</a></li>
+      <li><a href="#avis">Avis</a></li>
+    </ul>
+    <a class="tel" href="tel:+33300000000">03 00 00 00 00</a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="sheet"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="sheet" id="sheet" aria-label="Menu">
+  <a class="big" href="#atelier"><small>01</small>L'atelier</a>
+  <a class="big" href="#devis"><small>02</small>Tarifs</a>
+  <a class="big" href="#methode"><small>03</small>Méthode</a>
+  <a class="big" href="#avis"><small>04</small>Avis</a>
+  <a class="big" href="#contact"><small>05</small>Contact</a>
+  <p class="foot">14 quai de l'Exemple, 59000 Ville<br><a href="tel:+33300000000">03 00 00 00 00</a></p>
+</nav>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="tag fadein" id="heroTag">Garage indépendant · Toutes marques · Depuis 1998</p>
+      <h1><span><b>On répare.</b></span><span><b>Vous roulez.</b></span></h1>
+      <div class="sub fadein">
+        <p class="lead">Mécanique, freinage, pneus, climatisation et carrosserie. Un devis écrit avant de toucher à votre voiture, et aucune ligne ajoutée sans votre accord.</p>
+        <div class="cta">
+          <a class="btn" href="#devis">Estimer mon devis <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          <a class="btn ghost" href="tel:+33300000000">Appeler l'atelier</a>
+        </div>
+      </div>
+
+      <div class="diag">
+        <div class="car fadein" id="car">
+          <svg viewBox="0 0 800 300" role="img" aria-label="Schéma d'une voiture avec cinq points de contrôle">
+            <path class="ln thin" style="--i:0" pathLength="1" d="M10 268H790"/>
+            <path class="ln" style="--i:1" pathLength="1" d="M142 220H78Q60 220 60 202V184Q62 152 96 142L232 126Q302 72 390 64H500Q562 68 622 122L702 136Q746 144 750 178L752 204Q752 220 734 220H668"/>
+            <path class="ln" style="--i:2" pathLength="1" d="M258 220H552"/>
+            <path class="ln" style="--i:2" pathLength="1" d="M668 220A58 58 0 0 0 552 220M258 220A58 58 0 0 0 142 220"/>
+            <circle class="ln" style="--i:3" pathLength="1" cx="200" cy="220" r="46"/><circle class="ln thin" style="--i:4" pathLength="1" cx="200" cy="220" r="24"/>
+            <circle class="ln" style="--i:3" pathLength="1" cx="610" cy="220" r="46"/><circle class="ln thin" style="--i:4" pathLength="1" cx="610" cy="220" r="24"/>
+            <path class="ln" style="--i:4" pathLength="1" d="M256 128Q314 84 392 78H440V128Z"/>
+            <path class="ln" style="--i:4" pathLength="1" d="M454 78H498Q548 84 596 126L454 128Z"/>
+            <path class="ln thin" style="--i:5" pathLength="1" d="M447 78V208M300 132V208M560 150H596M330 150H366"/>
+            <path class="ln thin" style="--i:5" pathLength="1" d="M622 122L640 200M700 136L690 204M722 160H748M62 168H88"/>
+            <path class="ln dim" style="--i:7" pathLength="1" d="M200 284H610M200 278V290M610 278V290"/>
+            <text x="405" y="298" text-anchor="middle">EMPATTEMENT 2 620 MM</text>
+            <text x="14" y="34">FIG. 01 / CONTRÔLE EN 5 POINTS</text>
+          </svg>
+          <button class="spot" style="left:83.5%;top:44%" data-k="vidange" aria-pressed="true" aria-label="Vidange et entretien"><i></i></button>
+          <button class="spot" style="left:76.25%;top:73.3%" data-k="freins" aria-pressed="false" aria-label="Freinage"><i></i></button>
+          <button class="spot" style="left:25%;top:73.3%" data-k="pneus" aria-pressed="false" aria-label="Pneus et géométrie"><i></i></button>
+          <button class="spot" style="left:60%;top:33%" data-k="clim" aria-pressed="false" aria-label="Climatisation"><i></i></button>
+          <button class="spot" style="left:43%;top:57%" data-k="carro" aria-pressed="false" aria-label="Carrosserie et peinture"><i></i></button>
+        </div>
+        <div>
+          <div class="picks" id="picks" role="group" aria-label="Choisir un point de contrôle"></div>
+          <div class="sheet-card fadein" id="card" aria-live="polite">
+            <span class="ref" id="cRef">Point 01 / 05</span>
+            <h3 id="cTitle">Vidange et entretien</h3>
+            <p id="cText">Huile et filtre remplacés, niveaux refaits, 30 points de contrôle. Le carnet d'entretien est tamponné, garantie constructeur préservée.</p>
+            <dl><div><dt>À partir de</dt><dd id="cPrice">89 €</dd></div><div><dt>Immobilisation</dt><dd id="cTime">1 h</dd></div></dl>
+            <a class="btn" href="#devis" id="cGo">Ajouter au devis <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="strip" aria-hidden="true"><div class="track">
+      <span>Devis gratuit avant travaux</span><span>Pièces garanties 2 ans</span><span>Véhicule de prêt</span><span>Toutes marques</span><span>Pièces changées rendues</span><span>Paiement en 3 fois</span>
+      <span>Devis gratuit avant travaux</span><span>Pièces garanties 2 ans</span><span>Véhicule de prêt</span><span>Toutes marques</span><span>Pièces changées rendues</span><span>Paiement en 3 fois</span>
+    </div></div>
+  </div>
+
+  <section class="atelier" id="atelier">
+    <div class="wrap">
+      <div class="grid">
+        <div>
+          <p class="tag rv">L'atelier</p>
+          <h2 class="rv" style="--d:.05s">Trois mécanos.<br><em>Zéro baratin.</em></h2>
+        </div>
+        <div class="side">
+          <p class="rv" style="--d:.1s">Le Garage du Canal, c'est Franck, son fils Théo et Samir, carrossier depuis vingt ans. On entretient les voitures du quartier depuis 1998, de la citadine à l'utilitaire.</p>
+          <p class="rv" style="--d:.15s">On vous montre la pièce usée avant de la changer, on vous explique la facture ligne par ligne, et si une réparation peut attendre, on vous le dit.</p>
+        </div>
+      </div>
+      <div class="nums">
+        <div class="num rv" data-n="A1"><b data-count="27">27</b><span>ans au même endroit</span></div>
+        <div class="num rv" data-n="A2" style="--d:.06s"><b data-count="2400">2400</b><span>véhicules entretenus par an</span></div>
+        <div class="num rv" data-n="A3" style="--d:.12s"><b data-count="24">24</b><span>mois de garantie pièces</span></div>
+        <div class="num rv" data-n="A4" style="--d:.18s"><b data-count="4">4</b><span>véhicules de prêt gratuits</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="devis" style="padding-top:0">
+    <div class="wrap">
+      <p class="tag rv">Tarifs</p>
+      <h2 class="rv" style="--d:.05s">Cochez. <em>Le prix s'affiche.</em></h2>
+      <p class="lead rv" style="--d:.1s">Nos forfaits les plus courants, pièces et main-d'œuvre comprises. Le montant exact dépend du modèle : vous recevez un devis écrit sous 24 h.</p>
+
+      <div class="order rv" style="--d:.1s">
+        <div>
+          <div class="head"><span></span><span>Prestation</span><span>Durée</span><span>À partir de</span></div>
+          <label class="row"><input type="checkbox" data-k="vidange" data-p="89" data-n="Vidange et entretien"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Vidange et entretien</b><small>Huile, filtre, niveaux, 30 points de contrôle</small></span><span class="t">1 h</span><span class="p">89 €</span></label>
+          <label class="row"><input type="checkbox" data-k="freins" data-p="119" data-n="Plaquettes de frein avant"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Plaquettes de frein avant</b><small>Plaquettes, contrôle des disques et du liquide</small></span><span class="t">1 h 30</span><span class="p">119 €</span></label>
+          <label class="row"><input type="checkbox" data-k="pneus" data-p="69" data-n="Géométrie et équilibrage"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Géométrie et équilibrage</b><small>Réglage du parallélisme sur banc, 4 roues</small></span><span class="t">45 min</span><span class="p">69 €</span></label>
+          <label class="row"><input type="checkbox" data-k="clim" data-p="79" data-n="Recharge de climatisation"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Recharge de climatisation</b><small>Contrôle d'étanchéité, gaz et désinfection du circuit</small></span><span class="t">1 h</span><span class="p">79 €</span></label>
+          <label class="row"><input type="checkbox" data-k="distri" data-p="490" data-n="Kit de distribution"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Kit de distribution</b><small>Courroie, galets et pompe à eau</small></span><span class="t">1 jour</span><span class="p">490 €</span></label>
+          <label class="row"><input type="checkbox" data-k="ct" data-p="39" data-n="Pré-contrôle technique"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Pré-contrôle technique</b><small>On vérifie tout ce que le centre vérifiera</small></span><span class="t">40 min</span><span class="p">39 €</span></label>
+          <label class="row" style="border-bottom:0"><input type="checkbox" data-k="carro" data-p="0" data-n="Carrosserie (sur devis)"><span class="box"><svg viewBox="0 0 14 14"><path pathLength="1" d="M2 7.5l3.2 3.2L12 3.5"/></svg></span><span class="n"><b>Carrosserie et peinture</b><small>Rayure, bosse, pare-chocs : chiffrage sur photo</small></span><span class="t">variable</span><span class="p"><small>sur devis</small></span></label>
+        </div>
+        <aside class="total" aria-live="polite">
+          <div class="ref"><span>Ordre de réparation</span><span id="oRef">N° 0000</span></div>
+          <ul id="oList"><li class="empty">Aucune prestation cochée.</li></ul>
+          <div class="sum">
+            <small>Estimation à partir de</small>
+            <b><span id="oSum">0</span> €</b>
+            <p id="oNote">TTC, pièces et main-d'œuvre. Devis définitif après examen du véhicule.</p>
+            <a class="btn" href="#contact" id="oGo" aria-disabled="true">Demander ce devis <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark" id="methode">
+    <div class="wrap">
+      <p class="tag rv">Méthode</p>
+      <h2 class="rv" style="--d:.05s">Quatre étapes, <em>pas de surprise.</em></h2>
+      <ol class="steps">
+        <li class="step rv"><div class="no">01</div><h3>Diagnostic</h3><p>On branche la valise, on lève la voiture et on vous montre ce qu'on voit.</p></li>
+        <li class="step rv" style="--d:.08s"><div class="no">02</div><h3>Devis écrit</h3><p>Prix ferme par SMS ou e-mail. Rien ne démarre sans votre accord.</p></li>
+        <li class="step rv" style="--d:.16s"><div class="no">03</div><h3>Réparation</h3><p>Pièces d'origine ou de qualité équivalente, au choix. Vous repartez avec un véhicule de prêt.</p></li>
+        <li class="step rv" style="--d:.24s"><div class="no">04</div><h3>Restitution</h3><p>Facture expliquée, pièces usées rendues, voiture passée à l'aspirateur.</p></li>
+      </ol>
+      <ul class="vows">
+        <li class="rv"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><b>Devis gratuit et sans engagement</b><span>Même si vous faites faire les travaux ailleurs.</span></div></li>
+        <li class="rv" style="--d:.06s"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><b>Garantie constructeur préservée</b><span>Entretien conforme au carnet, tampon et facture à l'appui.</span></div></li>
+        <li class="rv"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><b>Pièces et main-d'œuvre garanties 2 ans</b><span>Si la panne revient, la reprise est pour nous.</span></div></li>
+        <li class="rv" style="--d:.06s"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg><div><b>Paiement en 3 fois sans frais</b><span>Dès 150 € de travaux, sur simple demande.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="avis" id="avis">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="tag rv">Avis</p>
+          <h2 class="rv" style="--d:.05s">Ils reviennent. <em>Leurs voitures aussi.</em></h2>
+        </div>
+        <div class="gauge rv" id="gauge">
+          <svg viewBox="0 0 40 40"><circle class="bg" cx="20" cy="20" r="15.9"/><circle class="fg" pathLength="100" cx="20" cy="20" r="15.9"/></svg>
+          <div><b>4,7</b><span>sur 5 · 312 avis</span></div>
+        </div>
+      </div>
+      <div class="quotes rv">
+        <blockquote class="q"><span class="job">Embrayage · Utilitaire</span><p>« Deux garages m'annonçaient 1 400 €. Ici, 980 € avec la pièce usée posée sur le comptoir et l'explication qui va avec. »</p><footer><span>Karim B.</span><span>★★★★★</span></footer></blockquote>
+        <blockquote class="q"><span class="job">Entretien · Citadine</span><p>« Ils m'ont dit que mes plaquettes pouvaient encore faire 10 000 km. Un garage qui refuse de me vendre des freins, je garde. »</p><footer><span>Claire D.</span><span>★★★★★</span></footer></blockquote>
+        <blockquote class="q"><span class="job">Carrosserie · Break</span><p>« Portière refaite en trois jours, teinte impeccable. Seul bémol : il faut appeler tôt le matin pour les avoir au téléphone. »</p><footer><span>Julien M.</span><span>★★★★☆</span></footer></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark contact" id="contact">
+    <div class="wrap grid">
+      <div>
+        <p class="tag rv" id="openTag">Atelier</p>
+        <h2 class="rv" style="--d:.05s">Passez, ou <em>appelez.</em></h2>
+        <a class="bigtel rv" style="--d:.1s" href="tel:+33300000000">03 00 00 00 00</a>
+        <p class="addr rv" style="--d:.12s">14 quai de l'Exemple, 59000 Ville</p>
+        <ul class="hours rv" id="hours" style="--d:.15s">
+          <li data-day="1"><span>Lundi</span><span>8 h – 12 h / 14 h – 18 h 30</span></li>
+          <li data-day="2"><span>Mardi</span><span>8 h – 12 h / 14 h – 18 h 30</span></li>
+          <li data-day="3"><span>Mercredi</span><span>8 h – 12 h / 14 h – 18 h 30</span></li>
+          <li data-day="4"><span>Jeudi</span><span>8 h – 12 h / 14 h – 18 h 30</span></li>
+          <li data-day="5"><span>Vendredi</span><span>8 h – 12 h / 14 h – 18 h 30</span></li>
+          <li data-day="6"><span>Samedi</span><span>8 h 30 – 12 h</span></li>
+          <li class="off" data-day="0"><span>Dimanche</span><span>Fermé</span></li>
+        </ul>
+      </div>
+
+      <div class="form rv" style="--d:.1s">
+        <h3>Demande de devis</h3>
+        <form id="form" novalidate>
+          <div class="f"><label for="f-nom">Nom</label><input id="f-nom" name="nom" autocomplete="name" required><span class="err">Indiquez votre nom.</span></div>
+          <div class="f"><label for="f-tel">Téléphone</label><input id="f-tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required><span class="err">Indiquez un numéro valide.</span></div>
+          <div class="f full"><label for="f-car">Véhicule (marque, modèle, année)</label><input id="f-car" name="car" placeholder="Ex. Clio 4 diesel, 2016" required><span class="err">Indiquez au moins la marque et le modèle.</span></div>
+          <div class="f full"><label for="f-need">Votre besoin</label><input id="f-need" name="need" placeholder="Ex. bruit au freinage, vidange, voyant moteur" required><span class="err">Décrivez votre besoin en quelques mots.</span></div>
+          <div class="f full"><label for="f-when">Quand pouvez-vous déposer le véhicule ?</label>
+            <select id="f-when" name="when"><option>Dès que possible</option><option>Cette semaine</option><option>La semaine prochaine</option><option>Je veux d'abord le devis</option></select>
+          </div>
+          <div class="f full"><button class="btn" type="submit">Envoyer la demande <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button></div>
+        </form>
+        <div class="done" id="done" role="status" aria-live="polite">
+          <span class="stamp">Demande enregistrée</span>
+          <h3>Merci <span id="dName"></span>.</h3>
+          <p id="dText"></p>
+          <button type="button" id="again">Faire une autre demande</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Garage du Canal · Site de démonstration : nom, avis et coordonnées fictifs.</span>
+    <div class="links"><a href="#atelier">L'atelier</a><a href="#devis">Tarifs</a><a href="#methode">Méthode</a><a href="#contact">Contact</a></div>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a href="tel:+33300000000"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 2.5h3l1.2 3.8-1.8 1.2a9 9 0 0 0 4.1 4.1l1.2-1.8 3.8 1.2v3a1 1 0 0 1-1 1C8 15 3 10 3 3.5a1 1 0 0 1 1-1z"/></svg>Appeler</a>
+  <a href="#devis">Estimer mon devis</a>
+</div>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (id) { return document.getElementById(id); };
+  var all = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* Nav, menu, dock */
+  var nav = $('nav'), dock = $('dock'), burger = $('burger');
+  function onScroll() { var y = window.scrollY; nav.classList.toggle('solid', y > 24); dock.classList.toggle('show', y > window.innerHeight * .45); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  function setMenu(o) {
+    document.body.classList.toggle('menu-open', o); document.body.style.overflow = o ? 'hidden' : '';
+    burger.setAttribute('aria-expanded', o); burger.setAttribute('aria-label', o ? 'Fermer le menu' : 'Ouvrir le menu');
+  }
+  burger.addEventListener('click', function () { setMenu(!document.body.classList.contains('menu-open')); });
+  $('sheet').addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+  /* Interactive diagnostic */
+  var DATA = {
+    vidange: ['Vidange et entretien', "Huile et filtre remplacés, niveaux refaits, 30 points de contrôle. Le carnet d'entretien est tamponné, garantie constructeur préservée.", '89 €', '1 h', 'Vidange'],
+    freins: ['Freinage', "Plaquettes, disques, liquide de frein. On mesure l'usure devant vous et on ne remplace que ce qui doit l'être.", '119 €', '1 h 30', 'Freins'],
+    pneus: ['Pneus et géométrie', 'Montage, équilibrage et réglage du parallélisme sur banc. Vos pneus neufs commandés le matin sont posés le lendemain.', '69 €', '45 min', 'Pneus'],
+    clim: ['Climatisation', "Contrôle d'étanchéité, recharge de gaz et désinfection du circuit. À refaire tous les deux ans pour garder du froid et de l'air sain.", '79 €', '1 h', 'Clim'],
+    carro: ['Carrosserie et peinture', 'Rayures, bosses, pare-chocs, éléments à remplacer. Teinte refaite en cabine, prise en charge du dossier assurance.', 'Sur devis', '2 à 5 jours', 'Carrosserie']
+  };
+  var keys = Object.keys(DATA), spots = all('.spot'), picks = $('picks'), card = $('card'), current = 'vidange';
+  keys.forEach(function (k) {
+    var b = document.createElement('button'); b.type = 'button'; b.dataset.k = k; b.textContent = DATA[k][4];
+    b.setAttribute('aria-pressed', k === current); picks.appendChild(b);
+  });
+  function show(k) {
+    current = k; var d = DATA[k];
+    $('cRef').textContent = 'Point 0' + (keys.indexOf(k) + 1) + ' / 05';
+    $('cTitle').textContent = d[0]; $('cText').textContent = d[1]; $('cPrice').textContent = d[2]; $('cTime').textContent = d[3];
+    spots.concat(all('button', picks)).forEach(function (s) { s.setAttribute('aria-pressed', s.dataset.k === k); });
+    card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap');
+  }
+  spots.concat(all('button', picks)).forEach(function (s) { s.addEventListener('click', function () { show(s.dataset.k); }); });
+  $('cGo').addEventListener('click', function () {
+    var box = document.querySelector('.row input[data-k="' + current + '"]');
+    if (box && !box.checked) { box.checked = true; recompute(); }
+  });
+
+  /* Work-order estimator */
+  var boxes = all('.row input'), list = $('oList'), go = $('oGo'), shown = 0;
+  $('oRef').textContent = 'N° ' + String(new Date().getFullYear()).slice(2) + ('0' + (new Date().getMonth() + 1)).slice(-2) + '-' + (100 + new Date().getDate() * 7);
+  function recompute() {
+    var sel = boxes.filter(function (b) { return b.checked; }), sum = 0, quote = false;
+    list.innerHTML = '';
+    if (!sel.length) { var e = document.createElement('li'); e.className = 'empty'; e.textContent = 'Aucune prestation cochée.'; list.appendChild(e); }
+    sel.forEach(function (b) {
+      var p = +b.dataset.p; sum += p; if (!p) quote = true;
+      var li = document.createElement('li'), a = document.createElement('span'), c = document.createElement('span');
+      a.textContent = b.dataset.n.replace(' (sur devis)', ''); c.textContent = p ? p + ' €' : 'sur devis';
+      li.appendChild(a); li.appendChild(c); list.appendChild(li);
+    });
+    go.setAttribute('aria-disabled', !sel.length);
+    $('oNote').textContent = quote ? 'Hors carrosserie, chiffrée sur photo. Devis définitif après examen du véhicule.' : "TTC, pièces et main-d'œuvre. Devis définitif après examen du véhicule.";
+    var from = shown, t0 = null; shown = sum;
+    if (reduce) { $('oSum').textContent = sum; return; }
+    requestAnimationFrame(function step(t) {
+      if (!t0) t0 = t; var k = Math.min((t - t0) / 450, 1), e = 1 - Math.pow(1 - k, 3);
+      $('oSum').textContent = Math.round(from + (sum - from) * e);
+      if (k < 1 && shown === sum) requestAnimationFrame(step); else if (shown === sum) $('oSum').textContent = sum;
+    });
+  }
+  boxes.forEach(function (b) { b.addEventListener('change', recompute); });
+  go.addEventListener('click', function () {
+    var sel = boxes.filter(function (b) { return b.checked; }).map(function (b) { return b.dataset.n; });
+    if (sel.length) $('f-need').value = sel.join(', ');
+  });
+
+  /* Reveal, counters, gauge */
+  function count(el) {
+    var end = +el.dataset.count; if (reduce) return; var t0 = null;
+    requestAnimationFrame(function step(t) {
+      if (!t0) t0 = t; var k = Math.min((t - t0) / 1300, 1), e = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(end * e).toLocaleString('fr-FR').replace(/ | /g, ' ');
+      if (k < 1) requestAnimationFrame(step);
+    });
+  }
+  all('[data-count]').forEach(function (el) { el.textContent = (+el.dataset.count).toLocaleString('fr-FR').replace(/ | /g, ' '); });
+  var rv = all('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in'); var c = e.target.querySelector('[data-count]'); if (c) count(c);
+        io.unobserve(e.target);
+      });
+    }, { threshold: .14, rootMargin: '0px 0px -5% 0px' });
+    rv.forEach(function (el) { io.observe(el); });
+  } else rv.forEach(function (el) { el.classList.add('in'); });
+
+  /* Opening status (split shifts), in the garage's time zone */
+  var WK = [[480, 720], [840, 1110]], H = { 1: WK, 2: WK, 3: WK, 4: WK, 5: WK, 6: [[510, 720]] };
+  var DAYS = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+  var fmt = function (m) { var h = Math.floor(m / 60), r = m % 60; return h + ' h' + (r ? ' ' + (r < 10 ? '0' : '') + r : ''); };
+  try {
+    var parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Paris', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+    var get = function (t) { return parts.filter(function (p) { return p.type === t; })[0].value; };
+    var day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
+    var now = (parseInt(get('hour'), 10) % 24) * 60 + parseInt(get('minute'), 10);
+    var li = document.querySelector('#hours li[data-day="' + day + '"]'); if (li) li.classList.add('today');
+    var msg = '', slots = H[day] || [], open = slots.filter(function (s) { return now >= s[0] && now < s[1]; })[0];
+    if (open) { document.documentElement.classList.add('is-open'); msg = "Atelier ouvert · jusqu'à " + fmt(open[1]); }
+    else {
+      var next = slots.filter(function (s) { return now < s[0]; })[0];
+      if (next) msg = "Atelier fermé · réouverture aujourd'hui à " + fmt(next[0]);
+      else for (var k = 1; k <= 7; k++) { var d = (day + k) % 7; if (H[d]) { msg = 'Atelier fermé · réouverture ' + (k === 1 ? 'demain' : DAYS[d]) + ' à ' + fmt(H[d][0][0]); break; } }
+    }
+    $('openTag').textContent = msg;
+  } catch (e) { /* static text stays */ }
+
+  /* Quote form */
+  var form = $('form'), done = $('done'), req = all('input[required]', form);
+  function check(i) {
+    var v = i.value.trim(), ok = v !== '';
+    if (ok && i.name === 'tel') ok = v.replace(/\D/g, '').length >= 9;
+    if (ok && (i.name === 'car' || i.name === 'need')) ok = v.length >= 3;
+    i.closest('.f').classList.toggle('bad', !ok); i.setAttribute('aria-invalid', !ok); return ok;
+  }
+  req.forEach(function (i) { i.addEventListener('blur', function () { if (i.value) check(i); }); i.addEventListener('input', function () { if (i.closest('.f').classList.contains('bad')) check(i); }); });
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = req.filter(function (i) { return !check(i); });
+    if (bad.length) { bad[0].focus(); return; }
+    $('dName').textContent = form.nom.value.trim().split(' ')[0];
+    $('dText').textContent = 'Votre demande pour « ' + form.need.value.trim() + ' » sur ' + form.car.value.trim() + ' est notée. Sur le site réel, le garage vous envoie le devis écrit sous 24 h.';
+    form.hidden = true; done.classList.add('on');
+  });
+  $('again').addEventListener('click', function () { form.reset(); form.hidden = false; done.classList.remove('on'); form.nom.focus(); });
+
+  $('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
